@@ -24,8 +24,10 @@ namespace kolokwium2.Services
         public async Task<Models.DTOs.Musician_tracks> GetMusiciansByID(int id)
         {
             return (Models.DTOs.Musician_tracks)_context.Musician_Tracks
+                .Include(e => e.Musician)
                 .Where(e => e.IdMusician == id)
-                .Select(e => new Models.DTOs.Musician_tracks).FirstOrDefault();
+                .Include(e => e.Track)
+                .Select(e => new Models.DTOs.Musician_tracks);
         }
     }
 }
